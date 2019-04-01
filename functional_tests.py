@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 import unittest
 
+
 class NewVisitorTest(unittest.TestCase):
 
     def setUp(self):
@@ -57,6 +58,8 @@ class NewVisitorTest(unittest.TestCase):
         self.fail('Finish the test!')
 
         # She visits the site and the lists are there
+
+
 
 if __name__ == "__main__":
     unittest.main(warnings='ignore')
