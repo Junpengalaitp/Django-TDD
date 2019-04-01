@@ -10,6 +10,11 @@ class NewVisitorTest(unittest.TestCase):
     
     def tearDown(self):
         self.brower.quit()
+
+    def check_for_row_in_list_table(self, row_text):
+        table = self.brower.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn(row_text, [row.text for row in rows])
     
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Alice visits the website
@@ -34,10 +39,7 @@ class NewVisitorTest(unittest.TestCase):
         # The To-Do lists shows: '1. Buy peacock feathers'
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
-
-        table = self.brower.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
 
         # The page shows textbar again which can input other To-Dos
         # She typed "Use peacock feathers to make a fly"
@@ -47,13 +49,8 @@ class NewVisitorTest(unittest.TestCase):
         time.sleep(1)
 
         # The Page updates again, the lists shows two events
-        table = self.brower.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn('1: Buy peacock feathers', [row.text for row in rows])
-        self.assertIn('2: Use peacock feathers to make a fly',
-            [row.text for row in rows]
-        )
-
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
+        self.check_for_row_in_list_table('2: Make peacock feathers to make a fly')
         # She wants find out wheather this site can remember her lists
         # She saw this site generates an unique url for her
         # And the site has some texts to explain the function
