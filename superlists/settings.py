@@ -11,7 +11,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'lists.apps.ListsConfig',
 
-    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -82,3 +82,4 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.abspath(os.path.join(BASE_DIR, '../static'))
